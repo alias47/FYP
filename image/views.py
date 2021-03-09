@@ -14,3 +14,5 @@ def propertyPage(request):
         form=ImageForm()    
     img=Image.objects.all()
     return render(request,"property.html",{"img":img,"form":form})
+    
+    

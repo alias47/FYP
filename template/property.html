@@ -20,11 +20,12 @@
 
 
   {% for x in img %}
-  {% if forloop.first %}<div class="row ">{% endif %}
-    <div class="col-lg-4 col-md-4 col-12">
-      <div class="text-center mt-2">
-        <img src="{{x.image.url}}" height="70%" width="70%" class="img-thumbnail" alt="...">
-        <h2 class="text-center">{{x.caption}}</h2>
+  {% if forloop.first %}
+  <div class="row ">{% endif %}
+    <div class="col-md-4 p-5">
+      <div class="p-3" style="box-shadow: 0px 0px 20px black;">
+        <img src="{{x.image.url}}" alt="not found" height="250" width="100%">
+        <h4 class="text-center">{{x.caption}}</h4>
       </div>
     </div>
     {% if forloop.counter|divisibleby:3 %}

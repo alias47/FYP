@@ -1,19 +1,28 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import(
+    UserCreationForm, UserChangeForm, PasswordChangeForm
+)
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .form import CreateUserForm
+from .form import CreateUserForm, EditProfileForm
+
+from image.models import Image
+from image.form import ImageForm
 
 # Create your views here.
 
 
 def indexPage(request):
-    return render(request, 'index.html')
+
+    img=Image.objects.all()
+    return render(request,"index.html",{"img":img,})
+    
+
 
 
 def registerPage(request):
@@ -67,13 +76,30 @@ def profilePage(request):
 
 def editProfilePage(request):
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        form = EditProfileForm(request.POST, instance=request.user)
 
         if form.is_valid():
             form.save()
             return redirect('profile')
 
     else:
-        form = UserChangeForm(instance=request.user)
+        form = EditProfileForm(instance=request.user)
         context = {'form': form}
         return render(request, 'editProfile.html', context)
+
+
+def changePasswordPage(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user )
+            return redirect('profile')
+        else:
+            return redirect('change-password')
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+        context = {'form': form}
+        return render(request, 'password.html', context)
