@@ -46,7 +46,7 @@
 
 body {
   margin: 0;
-  font-family: var(--bs-font-sans-serif);
+  font-family: var(--bs-font-sans-serif 'Helvetica Neue');
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -207,7 +207,7 @@ sup {
 }
 
 a {
-  color: #0d6efd;
+  color: #e5edf8;
   text-decoration: underline;
 }
 a:hover {

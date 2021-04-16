@@ -11,18 +11,24 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .form import CreateUserForm, EditProfileForm
 
-from image.models import Image
-from image.form import ImageForm
+from image.models import Photo, Category
+
+
 
 # Create your views here.
 
 
 def indexPage(request):
-
-    img=Image.objects.all()
-    return render(request,"index.html",{"img":img,})
+    photos = Photo.objects.all()  
+    category = request.GET.get('category')
+    if category == None:
+        photos = Photo.objects.all()
+    else:
+        photos = Photo.objects.filter(category__name=category) 
     
-
+    categories = Category.objects.all()
+    context = {'photos':photos, 'categories': categories}   
+    return render(request, 'index.html', context)
 
 
 def registerPage(request):
