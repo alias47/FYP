@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<section  class="items-grid section">
+  <div class="container">
+    <div class="row">
+        <h1>{{photo.category.name}}</h1>
+      <div class="col-md-2 m-4">
+        <div class="card-1 shadow-lg p-3 mb-5 rounded">
+          <div class="card-header">
+              Categories
+          </div>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                  <a class="nav-link text-dark " href="{% url 'buy' %}"> ALL</a></li>
+              {% for category in categories %}
+              <li   class="list-group-item">
+                  <a class="nav-link text-dark" href="{% url 'buy' %}{{category.slug}}">
+                      {{category.name}} </a>
+                      
+              </li>
+              {% endfor %}
+
+              <a href="{% url 'add' %}"  style="background-color: #5830E0;" class="btn btn-dark btn-block btn-sm m-1">Sell your Property</a>
+
+          </ul>
+      </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          
+            
+                <div class=" offset">
+                    <form>
+                        <div class="input-group">
+                            <input name="q" type="text" placeholder="Search" class="form-control form-control-md" />
+                            <div class="input-group-append">
+                                <button class="btn btn-dark btn-lg">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          {% for photo in photos %}
+          
+          <div class="col-md-4">
+            <!-- Start Single Grid -->
+              <div class="single-grid wow fadeInUp " data-wow-delay=".2s">
+              <div class="image">
+                <a href="item-details.html" class="thumbnail"><img src="{{photo.image.url}}" alt="#"></a>
+                <div class="author">
+                  <div class="author-image">
+                    <a href="javascript:void(0)"><img src="assets/images/items-grid/author-1.jpg" alt="#">
+                      <span>Smith jeko</span></a>
+                  </div>
+                  <a class="sale" href="{% url 'detail' photo.id %}">View Detail</a>
+                </div>
+              </div>
+              <div class="content">
+                <div class="top-content">
+                  <i class=""></i>Category: {{photo.category.name}}</a></li>
+                  
+                  <h3 class="title">
+                    <span> {{photo.description}} </span>
+                  </h3>
+                  <ul class="info">
+                    <li><i class="lni lni-map-marker"></i>{{photo.location}}, Nepal</a></li>
+                      
+                  </ul>
+
+                </div>
+                <div class="bottom-content">
+                  <p class="price">Start From: <span>NRs {{photo.price}}</span></p>
+                  <a href="javascript:void(0)" class="like"><i class="lni lni-heart"></i></a>
+                </div>
+
+              </div>
+            </div>
+            <!-- End Single Grid -->
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+{% endblock content %}
+<!-- <style>
+    .image-thumbail {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card:hover {
+        transform: scale(1.1);
+    }
+</style>
+
+<div class="container m-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card-1 shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-header">
+                    Categories
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a class="nav-link text-dark" href="{% url 'buy' %}"> ALL</a></li>
+                    {% for category in categories %}
+                    <li class="list-group-item">
+                        <a class="nav-link text-dark" href="{% url 'buy' %}?category={{category.name}}">
+                            {{category.name}} </a>
+                    </li>
+                    {% endfor %}
+
+                    <a href="{% url 'add' %}" class="btn btn-dark btn-block btn-sm m-1">Sell your Property</a>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                {% for photo in photos %}
+               
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                        <img class="image-thumbail" src="{{photo.image.url}}" class="card-img-top"
+                            alt="Image Not Found">
+                        <div class="card-body">
+                            <small> Category: {{photo.category.name}} </small>
+                            <h5 class="card-title">NRs {{photo.price}}</h5>
+                            <p class="card-text">{{photo.description}} </p>
+                        </div>
+                        <a href="{% url 'detail' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View Detail</a>
+                    </div>
+                </div>
+                {% empty %}
+                <h3>no photos..</h3>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+

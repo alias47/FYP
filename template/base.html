@@ -1,73 +1,294 @@
-<!DOCTYPE html>
+
 {% load static %}
-<html lang="en">
+
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Home Finder</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+  <!-- Place favicon.ico in the root directory -->
 
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-
+  <!-- Web Font -->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+  </style>
     
+    
+ 
+
+  <!-- ========================= CSS here ========================= -->
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/LineIcons.2.0.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/tiny-slider.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/glightbox.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
 </head>
 
-<div class="container-fluid-auto">
-<nav class="navbar" style="background-color: #49CBF4; height:30px;">
-<div class="text-right">Contact-number 9843164777</div>
+<body>
+  <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
 
-</nav>
-<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #4169E1;">
-  <a class="navbar-brand" href="#">
-    <h1>{{ user }}</h1>
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <!-- Preloader -->
+  <!-- <div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div> -->
+  <!-- /End Preloader -->
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home' %}">Home</a>
-      </li>
-      
-      <li class="nav-item text-primary ">
-        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'buy' %}">Property</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-      </li>
-    </ul>
+  <!-- Start Header Area -->
+
+  <header class="header navbar-area">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-12">
+          <div class="nav-inner">
+            <nav class="navbar navbar-expand-lg">
+              <a class="navbar-brand" href="{% url 'home' %}"> <img src="assets/images/logo/logo.svg" alt="Logo">
+              </a>
+              {% if request.user.is_authenticated %}
+              <p>{{request.user}}</p>
+              {% endif %}
+              <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                <ul id="nav" class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                    <a class="active" href="{% url 'home' %}" 
+                       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class=" dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
+                      data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent" aria-expanded="false"
+                      aria-label="Toggle navigation">Properties</a>
+                    <ul class="sub-menu collapse" id="submenu-1-2">
+                      {% for category in categories %}
+                      <li class="nav-item"><a href="{% url 'buy' %}?category={{category.name}}">{{category.name}}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <form>
+                      <div class="input-group">
+                          <input name="q" type="text" placeholder="Search" class="form-control form-control-md" />
+                          <div class="input-group-append">
+                              <button class="btn btn-dark btn-lg">Search</button>
+                          </div>
+                      </div>
+                  </form>  
+                  </li>
+
+
+                </ul>
+              </div> <!-- navbar collapse -->
+              <div class="login-button">
+                <ul>
+                  <li>
+                  {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout' %}"><i class="lni lni-enter"></i> Logout</a>
+                  </li>
+                  {% else %}
+                  <li>
+                    <a href="{% url 'register' %}"><i class="lni lni-user"></i>Sign Up</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'login' %}"><i class="lni lni-enter"></i> Login</a>
+                    
+                    {% endif %}
+                  </li>
+                </ul>
+              </div>
+              <div class="button header-button">
+                <a href="{% url 'profile' %}" class="btn">My Account</a>
+              </div>
+            </nav> <!-- navbar -->
+          </div>
+        </div>
+      </div> <!-- row -->
+    </div> <!-- container -->
+  </header>
+  {% block content%}
+
+  {% endblock %}
+<!-- Start Footer Area -->
+<footer class="footer">
+  <!-- Start Footer Top -->
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-12">
+          <!-- Single Widget -->
+          <div class="single-footer mobile-app">
+            <h3>Mobile Apps</h3>
+            <div class="app-button">
+              <a href="javascript:void(0)" class="btn">
+                <i class="lni lni-play-store"></i>
+                <span class="text">
+                  <span class="small-text">Get It On</span>
+                  Google Play
+                </span>
+              </a>
+              <a href="javascript:void(0)" class="btn">
+                <i class="lni lni-apple"></i>
+                <span class="text">
+                  <span class="small-text">Get It On</span>
+                  App Store
+                </span>
+              </a>
+            </div>
+          </div>
+          <!-- End Single Widget -->
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+          <!-- Single Widget -->
+          <div class="single-footer f-link">
+            <h3>Locations</h3>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <ul>
+                  <li><a href="javascript:void(0)">Chicago</a></li>
+                  <li><a href="javascript:void(0)">New York City</a></li>
+                  <li><a href="javascript:void(0)">San Francisco</a></li>
+                  <li><a href="javascript:void(0)">Washington</a></li>
+                  <li><a href="javascript:void(0)">Boston</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <ul>
+                  <li><a href="javascript:void(0)">Los Angeles</a></li>
+                  <li><a href="javascript:void(0)">Seattle</a></li>
+                  <li><a href="javascript:void(0)">Las Vegas</a></li>
+                  <li><a href="javascript:void(0)">San Diego</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- End Single Widget -->
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+          <!-- Single Widget -->
+          <div class="single-footer f-link">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="javascript:void(0)">About Us</a></li>
+              <li><a href="javascript:void(0)">How It's Works</a></li>
+              <li><a href="{% url 'login' %}">Login</a></li>
+              <li><a href="{% url 'register' %}">Signup</a></li>
+             
+            </ul>
+          </div>
+          <!-- End Single Widget -->
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+          <!-- Single Widget -->
+          <div class="single-footer f-contact">
+            <h3>Contact</h3>
+            <ul>
+              <li>Kupondole, Lalitpur <br> Kathmandu</li>
+              <li>Tel. +(123) 1800-567-8990 <br> Mail. support@classigrids.com</li>
+            </ul>
+          </div>
+          <!-- End Single Widget -->
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
-</div>
-<style>
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+  <!--/ End Footer Middle -->
+  <!-- Start Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="inner">
+        <div class="row">
+          <div class="col-12">
+            <div class="content">
+              <ul class="footer-bottom-links">
+                <li><a href="javascript:void(0)">Terms of use</a></li>
+                <li><a href="javascript:void(0)"> Privacy Policy</a></li>
+                <li><a href="javascript:void(0)">Advanced Search</a></li>
+                <li><a href="javascript:void(0)">Site Map</a></li>
+                <li><a href="javascript:void(0)">Information</a></li>
+              </ul>
+              <p class="copyright-text">Designed and Developed by <a href="https://graygrids.com/" rel="nofollow"
+                  target="_blank">Atit Raj Kayastha</a>
+              </p>
+              <ul class="footer-social">
+                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Footer Middle -->
+</footer>
+<!--/ End Footer Area -->
 
-  body {
-    overflow-x: hidden;
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-  }
-</style>
+<!-- ========================= scroll-top ========================= -->
+<a href="#" class="scroll-top btn-hover">
+  <i class="lni lni-chevron-up"></i>
+</a>
 
-  {% block content %}
-  
-  
-  {% endblock content %}
+<!-- ========================= JS here ========================= -->
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/wow.min.js' %}"></script>
+<script src="{% static 'assets/js/tiny-slider.js' %}"></script>
+<script src="{% static 'assets/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
+<script type="text/javascript">
+  //========= Category Slider 
+  tns({
+    container: '.category-slider',
+    items: 3,
+    slideBy: 'page',
+    autoplay: false,
+    mouseDrag: true,
+    gutter: 0,
+    nav: false,
+    controls: true,
+    controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      540: {
+        items: 2,
+      },
+      768: {
+        items: 4,
+      },
+      992: {
+        items: 5,
+      },
+      1170: {
+        items: 6,
+      }
+    }
+  });
+</script>
 
-  
- 
-</body>
-
-</html>
-
+  </html>
