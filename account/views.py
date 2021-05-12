@@ -39,10 +39,10 @@ def indexPage(request):
 #     return render(request, 'index.html', context)
 
 def searchPage(request):
-    
     if 'q' in request.GET:
         q=request.GET['q']
-        photos = Photo.objects.filter(location__icontains=q)
+        if q:
+            photos = Photo.objects.filter(location__icontains=q)
     else:
         photos = Photo.objects.all()
         

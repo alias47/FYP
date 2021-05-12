@@ -28,20 +28,20 @@
             </div>
             <div class="col-md-9">
                     <div class="search-form wow fadeInUp" data-wow-delay=".7s" style="margin-top: 5px;">
-                        <div class="row">
-                            <div class="col-lg-10 col-md-4 col-12 p-0">
-                                <form action="/search">
+                        <form action="/search">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-4 col-12 p-0">
                                     <div class="search-input">
                                         <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
                                         <input type="text" name="q" id="keyword" placeholder="Search for Properties, Location">
                                     </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-12 p-0">
-                                <div class="search-btn button">
-                                    <button class="btn"><i class="lni lni-search-alt"></i> Search</button>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-12 p-0">
+                                    <div class="search-btn button">
+                                        <button class="btn"><i class="lni lni-search-alt"></i> Search</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </form>
                     </div>
                 <div class="row">
@@ -54,26 +54,26 @@
                             <div class="image" style="width: 100%;">
                                 <a href="item-details.html" class="thumbnail"><img src="{{photo.image.url}}"style="height: 280px;" alt="#"></a>
                                 <div class="author text-white">
-                                            <span>Property Seller, {{photo.author}}</span></a>
+                                            <i>Property Seller, {{photo.author}}</i>
                                   
                                     <a class="sale" href="{% url 'detail' photo.id %}">View Detail</a>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <i class=""></i>Category: {{photo.category.name}}</a></li>
+                                    <i>Category: {{photo.category.name}}</i></li>
 
                                     <h3 class="title">
-                                        <span> {{photo.description}} </span>
+                                        <i> {{photo.description}} </i>
                                     </h3>
                                     <ul class="info text-success">
-                                        <li><i class="lni lni-map-marker text-primary"></i>{{photo.location}}, Nepal</a></li>
+                                        <li><i class="lni lni-map-marker text-primary"></i>{{photo.location}}, Nepal</li>
 
                                     </ul>
 
                                 </div>
                                 <div class="bottom-content">
-                                    <p class="price">Price: Rs. <span>NRs {{photo.price}}</span></p>
+                                    <p class="price"><i> Price:<span>NRs. {{photo.price}}</span></i></p>
                                    
                                 </div>
 

@@ -27,24 +27,25 @@
                 </div>
             </div>
             <div class="col-md-9">
-                    <span class="text-muted "> Search result for "{{request.GET.q}}" </span>
-                    <div class="search-form wow fadeInUp" data-wow-delay=".7s" style="margin-top: 5px;">
-                        <div class="row">
-                            <div class="col-lg-10 col-md-4 col-12 p-0">
-                                <form action="/search">
-                                    <div class="search-input">
-                                        <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                        <input type="text" name="q" id="keyword" placeholder="Search for Properties, Location">
-                                    </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-12 p-0">
-                                <div class="search-btn button">
-                                    <button class="btn"><i class="lni lni-search-alt"></i> Search</button>
+                <span class="text-muted "> Search result for "{{request.GET.q}}" </span>
+                <div class="search-form wow fadeInUp" data-wow-delay=".7s" style="margin-top: 5px;">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-4 col-12 p-0">
+                            <form action="/search">
+                                <div class="search-input">
+                                    <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
+                                    <input type="text" name="q" id="keyword"
+                                        placeholder="Search for Properties, Location">
                                 </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-12 p-0">
+                            <div class="search-btn button">
+                                <button class="btn"><i class="lni lni-search-alt"></i> Search</button>
                             </div>
                         </div>
-                        </form>
                     </div>
+                    </form>
+                </div>
                 <div class="row">
 
                     {% for photo in photos %}
@@ -53,32 +54,32 @@
                         <!-- Start Single Grid -->
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image" style="width: 100%;">
-                                <a href="item-details.html" class="thumbnail"><img src="{{photo.image.url}}"style="height: 280px;" alt="#"></a>
-                                <div class="author">
-                                    <div class="author-image">
-                                        <a href="javascript:void(0)"><img src="assets/images/items-grid/author-1.jpg"
-                                                alt="#">
-                                            <span>Smith jeko</span></a>
-                                    </div>
+                                <a href="item-details.html" class="thumbnail"><img src="{{photo.image.url}}"
+                                        style="height: 280px;" alt="#"></a>
+                                <div class="author text-white">
+                                    
+                                        <i>Property Seller, {{photo.author}} </i>
+                                  
                                     <a class="sale" href="{% url 'detail' photo.id %}">View Detail</a>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <i class=""></i>Category: {{photo.category.name}}</a></li>
+                                    <i class="">Category: {{photo.category.name}}</i></li>
 
                                     <h3 class="title">
-                                        <span> {{photo.description}} </span>
+                                        <i> {{photo.description}} </i>
                                     </h3>
-                                    <ul class="info">
-                                        <li><i class="lni lni-map-marker"></i>{{photo.location}}, Nepal</a></li>
+                                    <ul class="info text-success">
+                                        <li><i class="lni lni-map-marker text-primary"></i>{{photo.location}}, Nepal</a>
+                                        </li>
 
                                     </ul>
 
                                 </div>
                                 <div class="bottom-content">
-                                    <p class="price">Start From: <span>NRs {{photo.price}}</span></p>
-                                    <a href="javascript:void(0)" class="like"><i class="lni lni-heart"></i></a>
+                                    <p class="price"><i> Price: <span>NRs. {{photo.price}}</span></i></p>
+                                    
                                 </div>
 
                             </div>

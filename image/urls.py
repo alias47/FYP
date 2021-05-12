@@ -10,7 +10,7 @@ urlpatterns = [
     path('detail/delete/<str:pk>/', views.deletePage, name='delete'),
     path('sell/', views.addPage, name='add'),
     path('property/rate/<int:pk>/', views.rating, name='property.rating'),
-    path('recommendation/',views.recommendation,name='recommendation'),
+    path('recommendation/',views.collaborative,name='collaborative'),
  
     
 ]

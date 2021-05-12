@@ -10,11 +10,13 @@
                     <h3 class="text-danger">Are you sure want to delete?</h3>
                     
                     <h4>{{photo.location}}</h4>
-                    <div class="mt-4">
-                        <a href="{% url 'delete' photo.id %} &&action=confirm " class="btn btn-danger">Confirm Delete</a>
-                        
-                        <a href="{% url 'buy'%}" class="btn btn-warning">Cancel</a>
-                    </div>
+                    <form action="{% url 'delete' photo.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="">
+                            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                            <a href="{% url 'buy'%}" class="btn btn-warning">Cancel</a>
+                        </div>
+                    </form>
                 </div>
            </div>           
         </div>

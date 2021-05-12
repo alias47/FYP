@@ -67,18 +67,18 @@
                             {% if request.user.is_authenticated %}
                             <p>Namaste, {{request.user}}</p>
                             {% endif %}
-                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                            <!-- <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="toggler-icon"></span>
                                 <span class="toggler-icon"></span>
                                 <span class="toggler-icon"></span>
-                            </button>
+                            </button> -->
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a class=" active dd-menu collapsed" href="javascript:void(0)"
-                                            data-bs-toggle="collapse" data-bs-target="#submenu-1-1"
+                                        <a class=" active " href="{% url 'home' %}"
+                                            
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation">Home</a>
 
@@ -96,7 +96,14 @@
                                         </ul>
 
                                     </li>
+                                    
+                                    <li class="nav-item">
+                                        <a href="{% url 'collaborative' %}" class=" dd-menu collapsed" 
+                                           
+                                            aria-controls="navbarSupportedContent" aria-expanded="false"
+                                            aria-label="Toggle navigation">Top Property</a>
 
+                                    </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
                             <div class="login-button">
@@ -471,8 +478,8 @@
                                     <li><a href="javascript:void(0)">Site Map</a></li>
                                     <li><a href="javascript:void(0)">Information</a></li>
                                 </ul>
-                                <p class="copyright-text">Designed and Developed by <a href="#"
-                                        rel="nofollow" target="_blank">Atit Raj Kayastha</a>
+                                <p class="copyright-text">Designed and Developed by <a href="#" rel="nofollow"
+                                        target="_blank">Atit Raj Kayastha</a>
                                 </p>
                                 <ul class="footer-social">
                                     <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
