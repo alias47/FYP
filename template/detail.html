@@ -1,63 +1,184 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block content %}
+<!doctype html>
+<html lang="en">
 
-<title>Detail Page</title>
-<div class="m-5">
-  <br><br><br>
-  <h1>{{ category.name}}</h1>
-  
-    <div class="container">
-        <div class="row">
-            <div class="row justify-content-center">
-                <div class="col">
-                    <a href="{% url 'buy' %}" class="btn btn-dark my-3">Go Back</a>
-                    
-                    <div style="height:90vh">
-                        <img style="max-width: 100%; max-height:100%" src="{{photo.image.url}}" alt="Image Not Found">
-                        <p>{{photo.description}}</p>
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+	<title>Detail</title>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<a href="{% url 'buy' %}" class="btn btn-dark my-3">Go Back</a>
+				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active"> <img class="d-block w-100" src="{{photo.image.url}}"
+								alt="First slide">
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 mt-5">
+				<div class="row mt-4">
+					<h1><i class="fa fa" aria-hidden="true"></i>Rs. {{photo.price}}</h1>
+
+				</div>
+				<div class="row ">
+					<h3 class="text-info"><i class="fa fa-map-marker" aria-hidden="true"></i></h3>
+					<p style="font-size: 20px"> &nbsp;<span class="text-success">{{photo.location}}, Nepal </span> </p>
+				</div>
+				<div class="row ">
+					<h4>Bed: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</h4>
+					<div class="show"> <a class="btn btn-secondary" href="#" id="" data-toggle="" aria-haspopup="true"
+							aria-expanded="false">
+							{{photo.bed}} </a>
+					</div>
+				</div>
+
+				<div class="row mt-4">
+					<h4>Seller: &nbsp; &nbsp;&nbsp; &nbsp;</h4>
+					<p style="font-size: 18px">{{photo.author}} </p>
+				</div>
+				<div class="row mt-2">
+					<h4>Number: &nbsp; &nbsp;</h4>
+					<p style="font-size: 18px">{{photo.phone}} </p>
+				</div>
+
+				<div class="row mt-2">
+					<h4>Description &nbsp; &nbsp;</h4>
+					<p style="font-size: 18px">{{photo.description}} </p>
+				</div>
+
+
+				<div>
+					{% if user.id == photo.author.id %}
+					<a href="{% url 'edit' photo.id %}" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+					<a href="{% url 'delete' photo.id %} " class="btn btn-success"><i class="fa fa-edit"></i> Delete</a>
+					{% endif %}
+				</div>
+				<form class="form-horizontal" role="search" method="post" action="{% url 'property.rating' photo.id %}" onsubmit="return validateForm()"  name="ratingForm">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="row">
+                                <div class="col-lg-14">
+                                    <div class="star-rating">
+                                        <span>Rate Property</span>
+                                        <span class="fa fa-star-o" data-rating="1"></span>
+                                        <span class="fa fa-star-o" data-rating="2"></span>
+                                        <span class="fa fa-star-o" data-rating="3"></span>
+                                        <span class="fa fa-star-o" data-rating="4"></span>
+                                        <span class="fa fa-star-o" data-rating="5"></span>
+                                        
+                                        {% if rate_flag %}
+                                            <input type="hidden" name="rating" class="rating-value" value="{{movie_rating}}" >
+                                        {% else %}
+                                            <input type="hidden" name="rating" class="rating-value" value="0">
+                                        {% endif %}
+                                        {% csrf_token %}
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" class="button" value="Submit">
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                </form>
 
-{% for photo in related %}
-          <div class="col-md-4">
-            <!-- Start Single Grid -->
-              <div class="single-grid wow fadeInUp " data-wow-delay=".2s">
-              <div class="image">
-                <a href="item-details.html" class="thumbnail"><img src="{{photo.image.url}}" alt="#"></a>
-                <div class="author">
-                  <div class="author-image">
-                    <a href="javascript:void(0)"><img src="assets/images/items-grid/author-1.jpg" alt="#">
-                      <span>Smith jeko</span></a>
-                  </div>
-                  <a class="sale" href="{% url 'detail' photo.id %}">View Detail</a>
-                </div>
-              </div>
-              <div class="content">
-                <div class="top-content">
-                  <i class=""></i>Category: {{photo.category.name}}</a></li>
-                  
-                  <h3 class="title">
-                    <span> {{photo.description}} </span>
-                  </h3>
-                  <ul class="info">
-                    <li><i class="lni lni-map-marker"></i>{{photo.location}}, Nepal</a></li>
-                      
-                  </ul>
 
-                </div>
-                <div class="bottom-content">
-                  <p class="price">Start From: <span>NRs {{photo.price}}</span></p>
-                  <a href="javascript:void(0)" class="like"><i class="lni lni-heart"></i></a>
-                </div>
+			</div>
 
-              </div>
-            </div>
-            <!-- End Single Grid -->
-          </div>
-          {% endfor %}
-{% endblock content %}
+		</div>
+	</div>
+
+
+	<div class="container">
+		<div class="row mt-5">
+			<h2>Similar Properties</h2>
+		</div>
+
+		<div class="row mt-5">
+			{% for photo in related %}
+			<div class="col-md-3">
+				<div class="card">
+					<img class="card-img-top img-fluid" src="{{photo.image.url}}" style="height: 220px;">
+					<div class="card-title">
+						<i class=""></i>Category: {{photo.category.name}}</a></li>
+						<h5>Seller, {{photo.author}}</h5>
+					</div>
+					<div class="card-text">
+
+						<a class=" text-dark" style="padding: 10px;">Rs. {{photo.price}}</a> 
+						<a href="{% url 'detail' photo.id %}" class="btn btn-info text-light"><i class="fa fa-cart-plus"
+								aria-hidden="true"></i> View Detail</a> <br /><br />
+
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+	</div>
+
+	<style>
+		.btn-info {
+			color: #6610f2;
+			background-color: #6610f2;
+			border-color: #6610f2;
+		}
+
+
+
+		.btn-info:hover {
+			color: #6610f2;
+			background-color: #6610f2;
+			border-color: #6610f2;
+		}
+	</style>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+	</script>
+	<script>
+		var $star_rating = $('.star-rating .fa');
+
+    var SetRatingStar = function() {
+        return $star_rating.each(function() {
+        if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+            return $(this).removeClass('fa-star-o').addClass('fa-star');
+        } else {
+        return $(this).removeClass('fa-star').addClass('fa-star-o');
+        }
+        });
+        };
+
+    $star_rating.on('click', function() {
+    $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+    return SetRatingStar();
+    });
+
+    SetRatingStar();
+	</script>
+</body>
+
+</html>

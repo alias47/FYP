@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 m-5">
+            <div class="card">
+                <div class="card-header">
+                    <a href="{% url 'detail' photo.id %}" class="btn btn-dark my-3">Go Back</a>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <img src="{{photo.image.url}}" style="width:50%;">
+                                </div>
+                                <label class="mt-3">Update Image: </label>
+                                <input type="file" class="form-control" name="pimg">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Description</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="des" value="{{photo.description}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for=""> Price</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" name="pp" class="form-control" value="{{photo.price}}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="">Bed</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" name="bed" class="form-control" value="{{photo.bed}}">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-info text-white" style="background-color: #6610f2;"
+                                    value="SAVE CHANGES">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+{% if status %}
+<script>
+    $(function () {
+        alert("{{status}}");
+    });
+</script>
+{% endif %}
+{% endblock %}
+</section>

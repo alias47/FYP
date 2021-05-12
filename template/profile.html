@@ -114,38 +114,46 @@
 </div>
  -->
 <section class="items-grid section">
-       <div class="container">
-              <div class="row">
-                     <div class="col-md-2 m-4">
-                            <div class="card-1 shadow-lg p-3 mb-5 rounded">
-                                   <div class="card-header">
-                                          My Profile
-                                   </div>
-                                   <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">
-                                                 <a class="nav-link text-dark " href="{% url 'editProfile' %}"> Edit
-                                                        Profile</a>
-                                          </li>
-                                          <li class="list-group-item">
-                                                 <a class="nav-link text-dark " href="{% url 'change_password' %}"> Change Password</a>
-                                          </li>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 m-4">
+                <div class="card-1 shadow-lg p-3 mb-5 rounded">
+                    <div class="card-header">
+                        My Profile
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a class="nav-link text-dark " href="{% url 'editProfile' %}"> Edit
+                                Profile</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="nav-link text-dark " href="{% url 'change_password' %}">
+                                Change Password</a>
+                        </li>
 
-                                   </ul>
-                            </div>
-                     </div>
-                     <div class="col-md-9">
-                            <div class="row">
-                                   <div class="col-md-4">
-                                          <div class="single-grid wow fadeInUp " data-wow-delay=".2s">
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="single-grid wow fadeInUp " data-wow-delay=".2s">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <h3> {{request.user}}</h3>
+                                </li>
+                                <li class="list-group-item">
+                                    <h3> {{user.email}}</h3>
+                                </li>
+                            </ul>
+                        </div>
 
-                                          </div>
+                    </div>
 
-                                   </div>
-
-                            </div>
-                     </div>
-              </div>
-       </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>
 

@@ -1898,6 +1898,9 @@ ol {
     background-color: #5830E0 !important;
   }
 }
+.photo{
+  background-image: url("../images/logo/logo.png");
+}
 
 .header-button {
   display: inline-block;

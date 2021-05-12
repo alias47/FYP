@@ -1,94 +1,98 @@
-
 {% load static %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>Home Finder</title>
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
-  <!-- Place favicon.ico in the root directory -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-  <!-- Web Font -->
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-    @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-  </style>
-    
-    
- 
+    <title>HomeFinder</title>
 
-  <!-- ========================= CSS here ========================= -->
-  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/LineIcons.2.0.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/tiny-slider.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/glightbox.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- Web Font -->
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+    </style>
+
+
+
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/LineIcons.2.0.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/tiny-slider.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/glightbox.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
 
 </head>
 
 <body>
-  <!--[if lte IE 9]>
-      <p class="browserupgrade">
+    <!-- [if lte IE 9]> -->
+    <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
         <a href="https://browsehappy.com/">upgrade your browser</a> to improve
         your experience and security.
-      </p>
-    <![endif]-->
+    </p>
+    <!-- <![endif]--> -->
 
-  <!-- Preloader -->
-  <!-- <div class="preloader">
-    <div class="preloader-inner">
-        <div class="preloader-icon">
-            <span></span>
-            <span></span>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </div>
-</div> -->
-  <!-- /End Preloader -->
+    <!-- End Preloader -->
 
-  <!-- Start Header Area -->
+    <!-- Start Header Area -->
 
-  <header class="header navbar-area">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-12">
-          <div class="nav-inner">
-            <nav class="navbar navbar-expand-lg">
-              <a class="navbar-brand" href="{% url 'home' %}"> <img src="assets/images/logo/logo.svg" alt="Logo">
-              </a>
-              {% if request.user.is_authenticated %}
-              <p>{{request.user}}</p>
-              {% endif %}
-              <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-                <span class="toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                <ul id="nav" class="navbar-nav ms-auto">
-                  <li class="nav-item">
-                    <a class="active" href="{% url 'home' %}" 
-                       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class=" dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
-                      data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent" aria-expanded="false"
-                      aria-label="Toggle navigation">Properties</a>
-                    <ul class="sub-menu collapse" id="submenu-1-2">
-                      {% for category in categories %}
-                      <li class="nav-item"><a href="{% url 'buy' %}?category={{category.name}}">{{category.name}}</a></li>
-                      {% endfor %}
-                    </ul>
-                  </li>
-                  <li class="nav-item">
+    <header class="header navbar-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="nav-inner">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="{% url 'home' %}"> <img src="assets/images/logo/logo.svg"
+                                    alt="Logo">
+                            </a>
+                            {% if request.user.is_authenticated %}
+                            <p>Namaste, {{request.user}}</p>
+                            {% endif %}
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ms-auto">
+                                    <li class="nav-item">
+                                        <a class="active" href="{% url 'home' %}" aria-controls="navbarSupportedContent"
+                                            aria-expanded="false" aria-label="Toggle navigation">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'buy' %}" class=" dd-menu collapsed" data-bs-toggle=""
+                                            data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
+                                            aria-expanded="false" aria-label="Toggle navigation">Properties</a>
+                                        <ul class="sub-menu collapse" id="submenu-1-2">
+                                            {% for category in categories %}
+                                            <li class="nav-item"><a
+                                                    href="{% url 'buy' %}?category={{category.name}}">{{category.name}}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <!-- <li class="nav-item">
                     <form>
                       <div class="input-group">
                           <input name="q" type="text" placeholder="Search" class="form-control form-control-md" />
@@ -97,49 +101,49 @@
                           </div>
                       </div>
                   </form>  
-                  </li>
+                  </li> -->
 
 
-                </ul>
-              </div> <!-- navbar collapse -->
-              <div class="login-button">
-                <ul>
-                  <li>
-                  {% if request.user.is_authenticated %}
-                    <a href="{% url 'logout' %}"><i class="lni lni-enter"></i> Logout</a>
-                  </li>
-                  {% else %}
-                  <li>
-                    <a href="{% url 'register' %}"><i class="lni lni-user"></i>Sign Up</a>
-                  </li>
-                  <li>
-                    <a href="{% url 'login' %}"><i class="lni lni-enter"></i> Login</a>
-                    
-                    {% endif %}
-                  </li>
-                </ul>
-              </div>
-              <div class="button header-button">
-                <a href="{% url 'profile' %}" class="btn">My Account</a>
-              </div>
-            </nav> <!-- navbar -->
-          </div>
-        </div>
-      </div> <!-- row -->
-    </div> <!-- container -->
-  </header>
-  {% block content%}
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                            <div class="login-button">
+                                <ul>
+                                    <li>
+                                        {% if request.user.is_authenticated %}
+                                        <a href="{% url 'logout' %}"><i class="lni lni-enter"></i> Logout</a>
+                                    </li>
+                                    {% else %}
+                                    <li>
+                                        <a href="{% url 'register' %}"><i class="lni lni-user"></i>Sign Up</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'login' %}"><i class="lni lni-enter"></i> Login</a>
 
-  {% endblock %}
-<!-- Start Footer Area -->
-<footer class="footer">
-  <!-- Start Footer Top -->
-  <div class="footer-top">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-md-6 col-12">
-          <!-- Single Widget -->
-          <div class="single-footer mobile-app">
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="button header-button">
+                                <a href="{% url 'profile' %}" class="btn">My Account</a>
+                            </div>
+                        </nav> <!-- navbar -->
+                    </div>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </header>
+    {% block content%}
+
+    {% endblock %}
+    <!-- Start Footer Area -->
+    <footer class="footer">
+        <!-- Start Footer Top -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <!-- <div class="single-footer mobile-app">
             <h3>Mobile Apps</h3>
             <div class="app-button">
               <a href="javascript:void(0)" class="btn">
@@ -157,138 +161,129 @@
                 </span>
               </a>
             </div>
-          </div>
-          <!-- End Single Widget -->
-        </div>
-        <div class="col-lg-3 col-md-6 col-12">
-          <!-- Single Widget -->
-          <div class="single-footer f-link">
-            <h3>Locations</h3>
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-12">
-                <ul>
-                  <li><a href="javascript:void(0)">Chicago</a></li>
-                  <li><a href="javascript:void(0)">New York City</a></li>
-                  <li><a href="javascript:void(0)">San Francisco</a></li>
-                  <li><a href="javascript:void(0)">Washington</a></li>
-                  <li><a href="javascript:void(0)">Boston</a></li>
-                </ul>
-              </div>
-              <div class="col-lg-6 col-md-6 col-12">
-                <ul>
-                  <li><a href="javascript:void(0)">Los Angeles</a></li>
-                  <li><a href="javascript:void(0)">Seattle</a></li>
-                  <li><a href="javascript:void(0)">Las Vegas</a></li>
-                  <li><a href="javascript:void(0)">San Diego</a></li>
-                </ul>
-              </div>
+          </div> -->
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-link">
+                            <h3>Property</h3>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <ul>
+                                        {% for category in categories %}
+
+                                        <li> <a href="{% url 'buy' %}?category={{category.name}}">{{category.name}}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-link">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><a href="javascript:void(0)">About Us</a></li>
+                                <li><a href="{% url 'login' %}">Login</a></li>
+                                <li><a href="{% url 'register' %}">Signup</a></li>
+
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-contact">
+                            <h3>Contact</h3>
+                            <ul>
+                                <li>Kupondole, Lalitpur <br> Kathmandu</li>
+                                <li>Tel. +(977) 1800-567-8990 <br> Mail. atitkayasthaa@gmail.com</li>
+                            </ul>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                </div>
             </div>
-          </div>
-          <!-- End Single Widget -->
         </div>
-        <div class="col-lg-3 col-md-6 col-12">
-          <!-- Single Widget -->
-          <div class="single-footer f-link">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="javascript:void(0)">About Us</a></li>
-              <li><a href="javascript:void(0)">How It's Works</a></li>
-              <li><a href="{% url 'login' %}">Login</a></li>
-              <li><a href="{% url 'register' %}">Signup</a></li>
-             
-            </ul>
-          </div>
-          <!-- End Single Widget -->
-        </div>
-        <div class="col-lg-3 col-md-6 col-12">
-          <!-- Single Widget -->
-          <div class="single-footer f-contact">
-            <h3>Contact</h3>
-            <ul>
-              <li>Kupondole, Lalitpur <br> Kathmandu</li>
-              <li>Tel. +(123) 1800-567-8990 <br> Mail. support@classigrids.com</li>
-            </ul>
-          </div>
-          <!-- End Single Widget -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/ End Footer Middle -->
-  <!-- Start Footer Bottom -->
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="inner">
-        <div class="row">
-          <div class="col-12">
-            <div class="content">
-              <ul class="footer-bottom-links">
-                <li><a href="javascript:void(0)">Terms of use</a></li>
-                <li><a href="javascript:void(0)"> Privacy Policy</a></li>
-                <li><a href="javascript:void(0)">Advanced Search</a></li>
-                <li><a href="javascript:void(0)">Site Map</a></li>
-                <li><a href="javascript:void(0)">Information</a></li>
-              </ul>
-              <p class="copyright-text">Designed and Developed by <a href="https://graygrids.com/" rel="nofollow"
-                  target="_blank">Atit Raj Kayastha</a>
-              </p>
-              <ul class="footer-social">
-                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
-              </ul>
+        <!--/ End Footer Middle -->
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="content">
+                                <ul class="footer-bottom-links">
+                                    <li><a href="javascript:void(0)">Terms of use</a></li>
+                                    <li><a href="javascript:void(0)"> Privacy Policy</a></li>
+                                    <li><a href="javascript:void(0)">Advanced Search</a></li>
+                                    <li><a href="javascript:void(0)">Site Map</a></li>
+                                    <li><a href="javascript:void(0)">Information</a></li>
+                                </ul>
+                                <p class="copyright-text">Designed and Developed by <a href="#" rel="nofollow"
+                                        target="_blank">Atit Raj Kayastha</a>
+                                </p>
+                                <ul class="footer-social">
+                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
+                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Footer Middle -->
-</footer>
-<!--/ End Footer Area -->
+        <!-- End Footer Middle -->
+    </footer>
+    <!--/ End Footer Area -->
 
-<!-- ========================= scroll-top ========================= -->
-<a href="#" class="scroll-top btn-hover">
-  <i class="lni lni-chevron-up"></i>
-</a>
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
 
-<!-- ========================= JS here ========================= -->
-<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'assets/js/wow.min.js' %}"></script>
-<script src="{% static 'assets/js/tiny-slider.js' %}"></script>
-<script src="{% static 'assets/js/glightbox.min.js' %}"></script>
-<script src="{% static 'assets/js/main.js' %}"></script>
-<script type="text/javascript">
-  //========= Category Slider 
-  tns({
-    container: '.category-slider',
-    items: 3,
-    slideBy: 'page',
-    autoplay: false,
-    mouseDrag: true,
-    gutter: 0,
-    nav: false,
-    controls: true,
-    controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
-    responsive: {
-      0: {
-        items: 1,
-      },
-      540: {
-        items: 2,
-      },
-      768: {
-        items: 4,
-      },
-      992: {
-        items: 5,
-      },
-      1170: {
-        items: 6,
-      }
-    }
-  });
-</script>
+    <!-- ========================= JS here ========================= -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/tiny-slider.js' %}"></script>
+    <script src="{% static 'assets/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script type="text/javascript">
+        //========= Category Slider 
+        tns({
+            container: '.category-slider',
+            items: 3,
+            slideBy: 'page',
+            autoplay: false,
+            mouseDrag: true,
+            gutter: 0,
+            nav: false,
+            controls: true,
+            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                540: {
+                    items: 2,
+                },
+                768: {
+                    items: 4,
+                },
+                992: {
+                    items: 5,
+                },
+                1170: {
+                    items: 6,
+                }
+            }
+        });
+    </script>
 
-  </html>
+</html>

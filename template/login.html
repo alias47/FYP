@@ -15,13 +15,14 @@
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			background: #7abecc !important;
+			background:#46cbff !important;
+			
 		}
 		.user_card {
 			width: 350px;
 			margin-top: auto;
 			margin-bottom: auto;
-			background: #74cfbf;
+			background:hsl(204, 90%, 51%) !important;
 			position: relative;
 			display: flex;
 			justify-content: center;
@@ -45,8 +46,9 @@
 
 		.login_btn {
 			width: 100%;
-			background: #33ccff !important;
+			background:  #5830E0 !important;
 			color: white !important;
+		
 		}
 		.login_btn:focus {
 			box-shadow: none !important;
@@ -56,7 +58,7 @@
 			padding: 0 2rem;
 		}
 		.input-group-text {
-			background: #f7ba5b !important;
+			background:  #5bf7dd !important;
 			color: white !important;
 			border: 0 !important;
 			border-radius: 0.25rem 0 0 0.25rem !important;
@@ -105,7 +107,7 @@
 						</div>
 
 							<div class="d-flex justify-content-center mt-3 login_container">
-				 				<input class="btn login_btn" type="submit" value="Login">
+				 				<input class="btn login_btn font-weight-bold" type="submit" value="Login">
 				   			</div>
 					</form>
 
@@ -117,7 +119,7 @@
 		
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
-						Don't have an account? <a href="{% url 'register' %}" class="ml-2">Sign Up</a>
+						Don't have an account? <a href="{% url 'register' %}" class="ml-2 text-dark">Sign Up</a>
 					</div>
 			
 				</div>

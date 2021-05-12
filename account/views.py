@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .form import CreateUserForm, EditProfileForm
+from .form import CreateUserForm,EditProfileForm
 
 from image.models import Photo, Category
 
@@ -18,15 +18,13 @@ from image.models import Photo, Category
 # Create your views here.
 
 def indexPage(request):
-    if 'q' in request.GET:
-        q=request.GET['q']
-        photos = Photo.objects.filter(description__icontains=q)
-    else:
-        photos = Photo.objects.all()
+    
+    photos = Photo.objects.filter(is_featured=True)
         
+    categories = Category.objects.all()
     
     
-    return render(request, 'index.html', {'photos':photos})
+    return render(request, 'index.html', {'photos':photos,'categories':categories})
 
 # def indexPage(request):
 #     photos = Photo.objects.all()  
@@ -40,7 +38,19 @@ def indexPage(request):
 #     context = {'photos':photos, 'categories': categories}   
 #     return render(request, 'index.html', context)
 
-
+def searchPage(request):
+    
+    if 'q' in request.GET:
+        q=request.GET['q']
+        photos = Photo.objects.filter(location__icontains=q)
+    else:
+        photos = Photo.objects.all()
+        
+    categories = Category.objects.all()
+    
+    
+    return render(request, 'search.html', {'photos':photos,'categories':categories})
+    
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -85,13 +95,20 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def profilePage(request):
-    context = {'user': request.user}
+   
+    categories = Category.objects.all()
+    context = {'user': request.user, 'categories': categories}
+    
 
     return render(request, 'profile.html', context)
 
+     
 
 def editProfilePage(request):
+    
+    categories = Category.objects.all()
     if request.method == 'POST':
+        
         form = EditProfileForm(request.POST, instance=request.user)
 
         if form.is_valid():
@@ -100,11 +117,13 @@ def editProfilePage(request):
 
     else:
         form = EditProfileForm(instance=request.user)
-        context = {'form': form}
+        
+        context = {'form': form, 'categories': categories}
         return render(request, 'editProfile.html', context)
 
 @login_required(login_url='login')
 def changePasswordPage(request):
+    categories = Category.objects.all()
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
 
@@ -117,5 +136,5 @@ def changePasswordPage(request):
 
     else:
         form = PasswordChangeForm(user=request.user)
-        context = {'form': form}
+        context = {'form': form,'categories': categories}
         return render(request, 'password.html', context)

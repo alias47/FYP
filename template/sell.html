@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="container m-5 ">
+<div class="container m-5">
     <div class="row justify-content-center ">
         <div class="col-md-4">
             <a href="{% url 'buy' %}" class=" btn btn-dark my-3">Back</a>
@@ -15,38 +15,44 @@
                         <input required name="location" class="form-control" type="text" placeholder="Street Address">
                     </div>
 
-                <div class="form-group m-3">
-                    <label>Description</label>
-                    <input required name="description" class="form-control" type="text" placeholder="Enter An Description">
-                </div>
-                <div class="form-group m-3">
-                    <label>Bed</label>
-                    <input required name="bed" class="form-control" type="number" placeholder="No. of Bed">
-                </div>
-                <div class="form-group m-3">
-                    <label>Bathroom</label>
-                    <input required name="bathroom" class="form-control" type="number" placeholder="No. of bathroom">
-                </div>
-                <div class="form-group m-3">
-                    <label>Price</label>
-                    <input required name="price" class="form-control" type="number" placeholder="Price of Property">
-                </div>
-                
-                <div class="form-group m-3">
-                    <label>Select a category</label>
-                    <select name="category" class="form-control">
-                        <option value="none">Select an Property Type </option>
-                        {% for category in categories %}
-                        <option value="{{category.id}}">{{category.name}} </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                
+                    <div class="form-group m-3">
+                        <label>Description</label>
+                        <input required name="description" class="form-control" type="text"
+                            placeholder="Enter An Description">
+                    </div>
+                    <div class="form-group m-3">
+                        <label>Bed</label>
+                        <input required name="bed" class="form-control" type="number" placeholder="No. of Bed">
+                    </div>
+                    <div class="form-group m-3">
+                        <label>Bathroom</label>
+                        <input required name="bathroom" class="form-control" type="number"
+                            placeholder="No. of bathroom">
+                    </div>
+                    <div class="form-group m-3">
+                        <label>Price</label>
+                        <input required name="price" class="form-control" type="number" placeholder="Price of Property">
+                    </div>
+                    <div class="form-group m-3">
+                        <label>dsad</label>
+                        <input required name="author" class="form-control" type="text" placeholder="Price of Property">
+                    </div>
 
-                <div class="form-group m-3">
-                    <label>Upload Image</label>
-                    <input required name ='image' class="form-control-file form-control-lg" type="file">
-                </div>
+                    <div class="form-group m-3">
+                        <label>Select a category</label>
+                        <select name="category" class="form-control">
+                            <option value="none">Select an Property Type </option>
+                            {% for category in categories %}
+                            <option value="{{category.id}}">{{category.name}} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="form-group m-3">
+                        <label>Upload Image</label>
+                        <input required name='image' class="form-control-file form-control-lg" type="file">
+                    </div>
                     <button type="submit" class="btn btn-primary m-3">Submit</button>
                 </form>
             </div>

@@ -1,0 +1,219 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+	<title>Detail</title>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<a href="{% url 'buy' %}" class="btn btn-dark my-3">Go Back</a>
+				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active"> <img class="d-block w-100" src="{{photo.image.url}}" alt="First slide">
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<h2>{{photo.description}}</h2>
+				</div>
+				
+				<div class="row">
+					<h1><i class="fa fa-inr" aria-hidden="true"></i>{{photo.price}}</h1>
+					
+				</div>
+				<div class="row">
+					<h3 class="text-warning"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+							aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <i
+							class="fa fa-star-half-o" aria-hidden="true"></i><i class="fa fa-star-o"
+							aria-hidden="true"></i></h3>
+					&nbsp; &nbsp;
+					<h5></h5>
+				</div>
+				<!-- <div class="row">
+					<p><i class="text-success fa fa-check-square-o" aria-hidden="true"></i> <strong>Bank Offer</strong>
+						20% Instant Discount on SBI Credit Cards</p>
+				</div> -->
+				<div class="row mt-0">
+					<h3 class="text-info"><i class="fa fa-map-marker" aria-hidden="true"></i></h3>
+					<p style="font-size: 20px"> &nbsp;<span
+							class="text-success">{{photo.location}}, Nepal </span> </p>
+				</div>
+				<div class="row mt-0">
+					<h4>Bed: &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</h4>
+					<div class="show"> <a class="btn btn-secondary" href="#" 
+							id="" data-toggle="" aria-haspopup="true" aria-expanded="false">
+							{{photo.bed}} </a>	
+					</div>
+				</div>
+				<div class="row mt-2">
+					<h4>Bathroom: &nbsp; &nbsp;</h4>
+					<div class="show"> <a class="btn btn-secondary" href="#" 
+							id="" data-toggle="" aria-haspopup="true" aria-expanded="false">
+							{{photo.bathroom}} </a>	
+					</div>
+				</div>
+				
+			
+				<div class="row mt-4">
+					<h4>Seller: &nbsp; &nbsp;&nbsp; &nbsp;</h4>
+					<p style="font-size: 18px">{{request.user}} </p>
+				</div>
+				<div class="row mt-2">
+					<h4>Number: &nbsp; &nbsp;</h4>
+					<p style="font-size: 18px">987897984 </p>
+				</div>
+				<div class="row mt-2"> <a href="{% url 'rating' photo.id %}" class="btn btn-primary btn-sm"
+                    role="button">Give Rating . . . </a></div>
+
+			</div>
+		</div>
+	</div>
+    <div class="col-sm-offset-0 col-sm-8">
+        <form class="form-horizontal" role="search" method="post" action="{% url 'rating' photo.id %}"
+            onsubmit="return validateForm()" name="ratingForm">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="star-rating">
+                                <span class="fa fa-star-o" data-rating="1"></span>
+                                <span class="fa fa-star-o" data-rating="2"></span>
+                                <span class="fa fa-star-o" data-rating="3"></span>
+                                <span class="fa fa-star-o" data-rating="4"></span>
+                                <span class="fa fa-star-o" data-rating="5"></span>
+
+
+
+
+                                <input type="hidden" name="rating" class="rating-value" value="0">
+                                {% csrf_token %}
+
+                            </div>
+                        </div>
+                    </div><br>
+
+
+
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-info" value="submit">
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+	<div class="container">
+		<div class="row mt-5">
+			<h2>Similar Properties</h2>
+		</div>
+		
+		<div class="row mt-5">
+			{% for photo in related %}
+			<div class="col-md-3">
+				<div class="card">	
+					<img class="card-img-top img-fluid" src="{{photo.image.url}}" style="height: 220px;">
+					<div class="card-title">
+						<i class=""></i>Category: {{photo.category.name}}</a></li>
+						<h4>{{photo.description}}</h4>
+					</div>
+					<div class="card-text">
+						
+						<a class=" text-dark" style="padding: 10px;" >Rs. {{photo.price}}</a> &nbsp; 
+						<a href="{% url 'detail' photo.id %}" class="btn btn-info text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> View Detail</a> <br /><br />
+							
+					</div>
+					
+				</div>
+				
+			</div>
+			{% endfor %}
+		</div>
+		
+	</div>
+	
+	<style>
+		.btn-info {
+			color: #6610f2;
+			background-color: #6610f2;
+			border-color: #6610f2; }
+
+		
+
+		.btn-info:hover {
+			color: #6610f2; 
+			background-color: #6610f2;
+			border-color: #6610f2;
+		}
+	</style>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+	</script>
+</body>
+
+</html>
+<script type="text/javascript" src="{%static 'js/jquery.min.js'%}"></script>
+
+<script type="text/javascript" src="{%static 'js/bootstrap.min.js'%}"></script>
+<script type="text/javascript">
+    var $star_rating = $('.star-rating .fa');
+
+    var SetRatingStar = function () {
+        return $star_rating.each(function () {
+            if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data(
+                    'rating'))) {
+                return $(this).removeClass('fa-star-o').addClass('fa-star');
+            } else {
+                return $(this).removeClass('fa-star').addClass('fa-star-o');
+            }
+        });
+    };
+
+    $star_rating.on('click', function () {
+        $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+        return SetRatingStar();
+    });
+
+    SetRatingStar();
+    $(document).ready(function () {
+
+    });
+</script>
+<script type="text/javascript">
+    function validateForm() {
+        var x = document.forms["ratingForm"]["rating"].value;
+        if (x == "0") {
+            alert("Invalid Input");
+            return false;
+        }
+    }
+</script>

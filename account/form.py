@@ -13,3 +13,7 @@ class EditProfileForm(UserChangeForm):
 	class Meta:
 		model = User
 		fields = [ 'username', 'email', 'password' ]
+
+
+
+

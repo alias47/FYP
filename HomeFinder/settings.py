@@ -26,9 +26,9 @@ STATIC_DIR = os.path.join(BASE_DIR,"static")
 SECRET_KEY = '-mhe$i%1p-a3q1gvf9l+gt*c&of-$-n7-d-a-5*q)_7&j+k9%('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','gharherau.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'HomeFinder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
     }
 }
 
