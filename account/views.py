@@ -9,48 +9,53 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .form import CreateUserForm,EditProfileForm
+from .form import CreateUserForm, EditProfileForm
 
 from image.models import Photo, Category
 
 
-
 # Create your views here.
 
+# HOME PAGE
+
 def indexPage(request):
-    
+
     photos = Photo.objects.filter(is_featured=True)
-        
+
     categories = Category.objects.all()
-    
-    
-    return render(request, 'index.html', {'photos':photos,'categories':categories})
+
+    return render(request, 'index.html', {'photos': photos, 'categories': categories})
 
 # def indexPage(request):
-#     photos = Photo.objects.all()  
+#     photos = Photo.objects.all()
 #     category = request.GET.get('category')
 #     if category == None:
 #         photos = Photo.objects.all()
 #     else:
-#         photos = Photo.objects.filter(category__name=category) 
-    
+#         photos = Photo.objects.filter(category__name=category)
+
 #     categories = Category.objects.all()
-#     context = {'photos':photos, 'categories': categories}   
+#     context = {'photos':photos, 'categories': categories}
 #     return render(request, 'index.html', context)
+
+
+# SEARCH PAGE
 
 def searchPage(request):
     if 'q' in request.GET:
-        q=request.GET['q']
+        q = request.GET['q']
         if q:
             photos = Photo.objects.filter(location__icontains=q)
     else:
         photos = Photo.objects.all()
-        
+
     categories = Category.objects.all()
-    
-    
-    return render(request, 'search.html', {'photos':photos,'categories':categories})
-    
+
+    return render(request, 'search.html', {'photos': photos, 'categories': categories})
+
+
+# FOR REGISTRATION
+
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -68,6 +73,8 @@ def registerPage(request):
         context = {'form': form}
         return render(request, 'register.html', context)
 
+
+# FOR LOGIN
 
 def loginPage(request):
     if request.user.is_authenticated:
@@ -89,26 +96,31 @@ def loginPage(request):
         return render(request, 'login.html', context)
 
 
+# FOR LOGOUT
+
 def logoutUser(request):
     auth.logout(request)
     return redirect('home')
 
+
+# PROFILE PAGE
+
 @login_required(login_url='login')
 def profilePage(request):
-   
+
     categories = Category.objects.all()
     context = {'user': request.user, 'categories': categories}
-    
 
     return render(request, 'profile.html', context)
 
-     
+
+# FOR EDITING PROFILE
 
 def editProfilePage(request):
-    
+
     categories = Category.objects.all()
     if request.method == 'POST':
-        
+
         form = EditProfileForm(request.POST, instance=request.user)
 
         if form.is_valid():
@@ -117,9 +129,12 @@ def editProfilePage(request):
 
     else:
         form = EditProfileForm(instance=request.user)
-        
+
         context = {'form': form, 'categories': categories}
         return render(request, 'editProfile.html', context)
+
+
+# FOR CHANGING PASSWORD
 
 @login_required(login_url='login')
 def changePasswordPage(request):
@@ -129,12 +144,12 @@ def changePasswordPage(request):
 
         if form.is_valid():
             form.save()
-            update_session_auth_hash(request, form.user )
+            update_session_auth_hash(request, form.user)
             return redirect('profile')
         else:
             return redirect('change-password')
 
     else:
         form = PasswordChangeForm(user=request.user)
-        context = {'form': form,'categories': categories}
+        context = {'form': form, 'categories': categories}
         return render(request, 'password.html', context)

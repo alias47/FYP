@@ -2,7 +2,16 @@
 
 
 {% block content %}
-{% block title %} Properties{% endblock %}
+<style>
+    .search-new {
+        margin-top: 23px !important;
+        background: #fff3;
+        border-radius: 6px !important;
+        padding: 0px !important;
+        padding-right: 15px !important;
+    }
+</style>
+
 <section class="items-grid section">
     <div class="container">
         <div class="row">
@@ -28,23 +37,23 @@
                 </div>
             </div>
             <div class="col-md-9">
-                    <div class="search-form wow fadeInUp" data-wow-delay=".7s" style="margin-top: 5px;">
-                        <div class="row">
-                            <div class="col-lg-10 col-md-4 col-12 p-0">
-                                <form action="/search">
-                                    <div class="search-input">
-                                        <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                        <input type="text" name="q" id="keyword" placeholder="Search for Properties, Location">
-                                    </div>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-12 p-0">
-                                <div class="search-btn button">
-                                    <button class="btn"><i class="lni lni-search-alt"></i> Search</button>
+                <div class="search-form wow fadeInUp search-new" data-wow-delay=".7s" style="margin-top: 5px;">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-4 col-12 p-0">
+                            <form action="/search">
+                                <div class="search-input">
+                                    <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
+                                    <input type="text" name="q" id="keyword" placeholder="Search For Location">
                                 </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-12 p-0">
+                            <div class="search-btn button">
+                                <button class="btn"><i class="lni lni-search-alt"></i> Search</button>
                             </div>
                         </div>
-                        </form>
                     </div>
+                    </form>
+                </div>
                 <div class="row">
 
                     {% for photo in photos %}
@@ -53,28 +62,30 @@
                         <!-- Start Single Grid -->
                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                             <div class="image" style="width: 100%;">
-                                <a href="item-details.html" class="thumbnail"><img src="{{photo.image.url}}"style="height: 280px;" alt="#"></a>
+                                <a href="item-details.html" class="thumbnail"><img src="{{photo.image.url}}"
+                                        style="height: 280px;" alt="#"></a>
                                 <div class="author text-white">
-                                        <i>Property Seller, {{photo.author}}</i></a>  
+                                    <i>Property Seller, {{photo.author}}</i></a>
                                     <a class="sale" href="{% url 'detail' photo.id %}">View Detail</a>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <i text-dark >Category: {{photo.category.name}}</i></li>
+                                    <i text-dark>Category: {{photo.category.name}}</i></li>
 
                                     <h3 class="title">
                                         <i> {{photo.description}} </i>
                                     </h3>
                                     <ul class="info text-success">
-                                        <li><i class="lni lni-map-marker text-primary"></i>{{photo.location}}, Nepal</li>
+                                        <li><i class="lni lni-map-marker text-primary"></i>{{photo.location}}, Nepal
+                                        </li>
 
                                     </ul>
 
                                 </div>
                                 <div class="bottom-content">
                                     <p class="price"><i>Price:<span>NRs. {{photo.price}}</span></i></p>
-                                    
+
                                 </div>
 
                             </div>

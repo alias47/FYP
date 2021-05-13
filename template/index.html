@@ -61,12 +61,15 @@
                     <div class="nav-inner">
                         <nav class="navbar navbar-expand-lg">
 
+                            <a>
+                                <img src="{% static '/logo-new.png'  %}" style="width: 150px;
+                                margin-left: 32px;" alt="">
+                            </a>
+                            <!-- 
                             <a class="navbar-brand photo" href="{% url 'home' %}"> <img src="assets/images/hero/1.jpg"
                                     alt="Logo">
-                            </a>
-                            {% if request.user.is_authenticated %}
-                            <p>Namaste, {{request.user}}</p>
-                            {% endif %}
+                            </a> -->
+
                             <!-- <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +81,6 @@
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
                                         <a class=" active " href="{% url 'home' %}"
-                                            
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation">Home</a>
 
@@ -96,17 +98,20 @@
                                         </ul>
 
                                     </li>
-                                    
+
                                     <li class="nav-item">
-                                        <a href="{% url 'collaborative' %}" class=" dd-menu collapsed" 
-                                           
+                                        <a href="{% url 'collaborative' %}" class=" dd-menu collapsed"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation">Top Property</a>
 
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
-                            <div class="login-button">
+                            {% if request.user.is_authenticated %}
+                            <p>Namaste, {{request.user}}</p>
+                            {% endif %}
+                            <div class="login-button" style="margin-left: 0px;">
+
                                 <ul>
                                     <li>
                                         {% if request.user.is_authenticated %}
@@ -144,10 +149,10 @@
                     <div class="hero-text text-center">
                         <!-- Start Hero Text -->
                         <div class="section-heading">
-                            <h2 class="wow fadeInUp" data-wow-delay=".3s">Welcome to Home Finder</h2>
-                            <p class="wow fadeInUp" data-wow-delay=".5s">Buy And Sell Everything From House To
-                                Apartment <br>
-                                And More.</p>
+                            <h2 class="wow fadeInUp" data-wow-delay=".3s"> <i>Welcome to Home Finder</i> </h2>
+                            <p class="wow fadeInUp" data-wow-delay=".5s"> <i>Buy And Sell Everything From House To
+                                    Apartment <br>
+                                    And More.</i> </p>
                         </div>
                         <!-- End Search Form -->
                         <!-- Start Search Form -->
@@ -157,8 +162,7 @@
                                     <form action="/search">
                                         <div class="search-input">
                                             <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                            <input type="text" name="q" id="keyword"
-                                                placeholder="Search for Properties, Location">
+                                            <input type="text" name="q" id="keyword" placeholder="Search For Location">
                                         </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12 p-0">
@@ -186,9 +190,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Featured Property</h2>
-                        <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
-                            Ipsum available, but the majority have suffered alteration in some form.</p>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s"> <i>Featured Property</i> </h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s"> <i>There are many variations of passages of Lorem
+                                Ipsum available, but the majority have suffered alteration in some form.</i> </p>
                     </div>
                 </div>
             </div>
@@ -204,27 +208,27 @@
                                 <div class="author text-white">
 
 
-                                    <span>Property Seller, {{photo.author}}</span></a>
+                                    <i>Property Seller, {{photo.author}}</i></a>
 
                                     <a class="sale" href="{% url 'detail' photo.id %}">View Detail</a>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="top-content">
-                                    <a href="javascript:void(0)" class="tag">Category: {{photo.category.name}} </a>
+                                    <i>Category: {{photo.category.name}} </i>
                                     <h3 class="title">
-                                        <span> {{photo.description}} </span>
+                                        <i> {{photo.description}} </i>
                                     </h3>
-                                    <ul class="info-list">
-                                        <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i>
-                                                {{photo.location}}, Nepal
-                                            </a></li>
+                                    <ul class="info-list text-success">
+                                        <li><i class="lni lni-map-marker text-primary "></i>
+                                            {{photo.location}}, Nepal
+                                        </li>
 
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="bottom-content">
-                                    <p class="price">Price: Rs. <span> {{photo.price}}</span></p>
+                                    <i class="price">Price: Rs. <span> {{photo.price}}</span></i>
                                 </div>
 
                             </div>
@@ -261,8 +265,7 @@
                                 <div class="single-list wow fadeInUp" data-wow-delay=".2s">
                                     <i class="lni lni-book"></i>
                                     <h4>Fully Documented</h4>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search
-                                        for property.</p>
+
                                 </div>
                                 <!-- Start Single List -->
                             </div>
@@ -271,8 +274,7 @@
                                 <div class="single-list wow fadeInUp" data-wow-delay=".4s">
                                     <i class="lni lni-leaf"></i>
                                     <h4>Clean & Modern Design</h4>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search
-                                        for property.</p>
+
                                 </div>
                                 <!-- Start Single List -->
                             </div>
@@ -281,16 +283,14 @@
                                 <div class="single-list wow fadeInUp" data-wow-delay=".6s">
                                     <i class="lni lni-cog"></i>
                                     <h4>Completely Customizable</h4>
-                                    <p>Buy and sell everything from used cars to mobile phones and computer or search
-                                        for property.</p>
+
+                                    <!-- Start Single List -->
                                 </div>
-                                <!-- Start Single List -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
     <!-- /End Why Choose Area -->
 
@@ -303,9 +303,9 @@
                         <div class="content">
                             <h2 class="wow fadeInUp" data-wow-delay=".4s">Currently You Are Using<br>
                                 Lite Version Of HomeFinder</h2>
-                            <p class="wow fadeInUp" data-wow-delay=".6s">Please Be Patient</p>
+                            <i> We Are Currently Updating Our Web Features To Better Serve You</i>
                             <div class="button wow fadeInUp" data-wow-delay=".8s">
-                                <!-- <a href="javascript:void(0)" class="btn">Purchase Now</a> -->
+                                <i>dsadsa</i>
                             </div>
                         </div>
                     </div>
@@ -426,7 +426,7 @@
                                     <ul>
                                         {% for category in categories %}
 
-                                        <li> <a href="{% url 'buy' %}?category={{category.name}}">{{category.name}}</a>
+                                        <li> <a href="{% url 'buy' %}{{category.slug}}">{{category.name}}</a>
                                         </li>
                                         {% endfor %}
                                     </ul>

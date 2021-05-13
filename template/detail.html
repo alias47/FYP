@@ -15,6 +15,27 @@
 
 
 	<title>Detail</title>
+	<style type="text/css">
+        
+        .star-rating {
+            line-height:32px;
+            font-size:1.25em;
+            margin-left:-33px;
+            }
+        .star-rating .fa-star{
+        color: yellow;
+        }
+        .heart-rating {
+            line-height:32px;
+            font-size:1.25em;
+            margin-left:-33px;
+            }
+        .heart-rating .fa-heart{
+        color:yellow;
+        }
+        
+
+    </style>
 </head>
 
 <body>
@@ -23,10 +44,10 @@
 		<div class="row">
 			<div class="col-md-6">
 				<a href="{% url 'buy' %}" class="btn btn-dark my-3">Go Back</a>
-				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-					<div class="carousel-inner">
+				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+					<div class="carousel-inner" >
 						<div class="carousel-item active"> <img class="d-block w-100" src="{{photo.image.url}}"
-								alt="First slide">
+								alt="First slide"style="height: 300px;" >
 						</div>
 
 					</div>
@@ -70,26 +91,22 @@
 					<a href="{% url 'delete' photo.id %} " class="btn btn-danger"><i class="fa fa-edit"></i> Delete</a>
 					{% endif %}
 				</div>
+				
+				
 				<form class="form-horizontal" role="search" method="post" action="{% url 'property.rating' photo.id %}" onsubmit="return validateForm()"  name="ratingForm">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="row">
-                                <div class="col-lg-14">
+                                <div class="col-lg-12">
                                     <div class="star-rating">
                                         <span>Rate Property</span>
                                         <span class="fa fa-star-o" data-rating="1"></span>
                                         <span class="fa fa-star-o" data-rating="2"></span>
                                         <span class="fa fa-star-o" data-rating="3"></span>
-                                        <span class="fa fa-star-o" data-rating="4"></span>
-                                        <span class="fa fa-star-o" data-rating="5"></span>
-									
-										<span class="fa fa-star-o" data-rating="5"></span>
-                                        
-                                        {% if rate_flag %}
-                                            <input type="hidden" name="rating" class="rating-value" value="{{Property_rating}}" >
-                                        {% else %}
-                                            <input type="hidden" name="rating" class="rating-value" value="0">
-                                        {% endif %}
+                                        <span class="fa fa-star-o" data-rating="4"></span>	
+										<span class="fa fa-star-o" data-rating="5"></span>      
+											<input type="hidden" name="rating" class="rating-value" value="{{ my_rating }}">
+                             
                                         {% csrf_token %}
                                     </div>
                                 </div>
@@ -98,7 +115,9 @@
                         </div>
                     </div>
                 </form>
-
+				{% for messag in messages %}
+				<p id="messages">{{messag}}</p>
+			{% endfor %}
 
 			</div>
 
@@ -152,7 +171,8 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -160,26 +180,45 @@
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-	</script>
+	</script> -->
+
+	
+	<script type="text/javascript" src="{%static 'js/js/jquery.min.js'%}"> </script>
+	<script type="text/javascript" src="{%static 'js/js/bootstrap.min.js'%}"></script>
+
 	<script>
-		var $star_rating = $('.star-rating .fa');
 
-    var SetRatingStar = function() {
-        return $star_rating.each(function() {
-        if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-            return $(this).removeClass('fa-star-o').addClass('fa-star');
-        } else {
-        return $(this).removeClass('fa-star').addClass('fa-star-o');
-        }
-        });
-        };
+	var $star_rating = $('.star-rating .fa');
 
-    $star_rating.on('click', function() {
-    $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-    return SetRatingStar();
-    });
+	var SetRatingStar = function() {
+		return $star_rating.each(function() {
+		if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+			return $(this).removeClass('fa-star-o').addClass('fa-star');
+		} else {
+		return $(this).removeClass('fa-star').addClass('fa-star-o');
+		}
+		});
+		};
 
-    SetRatingStar();
+	$star_rating.on('click', function() {
+	$star_rating.siblings('input.rating-value').val($(this).data('rating'));
+	return SetRatingStar();
+	});
+
+	SetRatingStar();
+	$(document).ready(function() {
+
+	});
+	
+	</script>
+	<script type="text/javascript">
+		function validateForm(){
+		var x = document.forms["ratingForm"]["rating"].value;
+		if(x=="0"){
+			alert("Invalid Input");
+			return false;
+		}
+		}
 	</script>
 </body>
 

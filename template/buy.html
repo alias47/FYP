@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
+<style>
+    .search-new {
+        margin-top: 23px !important;
+        background: #fff3;
+        border-radius: 6px !important;
+        padding: 0px !important;
+        padding-right: 15px !important;
+    }
+</style>
 <section class="items-grid section">
     <div class="container">
         <div class="row">
@@ -27,13 +34,13 @@
                 </div>
             </div>
             <div class="col-md-9">
-                    <div class="search-form wow fadeInUp" data-wow-delay=".7s" style="margin-top: 5px;">
+                    <div class="search-form wow fadeInUp search-new" data-wow-delay=".7s">
                         <form action="/search">
                             <div class="row">
                                 <div class="col-lg-10 col-md-4 col-12 p-0">
                                     <div class="search-input">
                                         <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                        <input type="text" name="q" id="keyword" placeholder="Search for Properties, Location">
+                                        <input type="text" name="q" id="keyword" placeholder="Search For Location">
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12 p-0">
@@ -46,7 +53,7 @@
                     </div>
                 <div class="row">
 
-                    {% for photo in photos %}
+                    {% for photo in page.object_list %}
 
                     <div class="col-md-4">
                         <!-- Start Single Grid -->
@@ -82,11 +89,20 @@
                         <!-- End Single Grid -->
                     </div>
                     {% endfor %}
-
                 </div>
+                
+            </div>
+            <div class=" mt-2 center" style="width: 15%; margin-left: 50%; " >
+                {% if page.has_previous %}
+                <a href="{% url 'buy' %}?page={{ page.previous_page_number }}"> Previous </a>
+                {% endif %}
+                {% if page.has_next %}
+                <a href="{% url 'buy' %}?page={{ page.next_page_number }}"> Next </a>
+                {% endif %}
             </div>
         </div>
     </div>
+    
 </section>
 
 
